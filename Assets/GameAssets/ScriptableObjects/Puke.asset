@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca07d8faad25a507e9d6c651d9430f3a, type: 3}
-  m_Name: Nuke
+  m_Name: Puke
   m_EditorClassIdentifier: 
-  type: 1
-  rarity: 5
-  title: Nuclear bomb
-  image: {fileID: 21300000, guid: c508376fa735f2279b06d40004495283, type: 3}
-  stackSize: 12
+  type: 2
+  rarity: 1
+  title: Puke
+  image: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  stackSize: 2

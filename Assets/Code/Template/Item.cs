@@ -14,7 +14,7 @@ public class Item : ScriptableObject
     [Header ("UI")]
     public string title;
     public Sprite image;
-    public int stacksize = 1;
+    public int stackSize = 1;
 
 
     public enum ItemType {
