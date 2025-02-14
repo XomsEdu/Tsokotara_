@@ -1207,15 +1207,9 @@ Camera:
     width: 1
     height: 1
 <<<<<<< HEAD
-<<<<<<< HEAD
   near clip plane: 0.01
   far clip plane: 1000
   field of view: 100
-=======
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
->>>>>>> parent of b95f955 (General push)
 =======
   near clip plane: 0.3
   far clip plane: 1000
@@ -1252,9 +1246,6 @@ Transform:
 =======
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
-<<<<<<< HEAD
->>>>>>> parent of b95f955 (General push)
-=======
 >>>>>>> parent of b95f955 (General push)
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3350,7 +3341,6 @@ PrefabInstance:
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be4f977a9ca42d99d9b96f13de5ed179, type: 3}
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &754853796
 GameObject:
   m_ObjectHideFlags: 0
@@ -3613,8 +3603,6 @@ MonoBehaviour:
   - {fileID: 1778625451}
   inventoryItemPrefab: {fileID: 7144033319426473174, guid: ef79f22e0e94a45a4bc92b20fbd2267c,
     type: 3}
-=======
->>>>>>> parent of b95f955 (General push)
 =======
 >>>>>>> parent of b95f955 (General push)
 --- !u!1001 &780851356
@@ -11612,11 +11600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!1 &2130744248
-=======
---- !u!1 &2146316089
->>>>>>> parent of b95f955 (General push)
 =======
 --- !u!1 &2146316089
 >>>>>>> parent of b95f955 (General push)
@@ -11628,22 +11612,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
 <<<<<<< HEAD
-<<<<<<< HEAD
   - component: {fileID: 2130744249}
   m_Layer: 0
   m_Name: Static
 =======
-=======
->>>>>>> parent of b95f955 (General push)
   - component: {fileID: 2146316090}
   - component: {fileID: 2146316093}
   - component: {fileID: 2146316092}
   - component: {fileID: 2146316091}
   m_Layer: 5
   m_Name: MuffinButton (2)
-<<<<<<< HEAD
->>>>>>> parent of b95f955 (General push)
-=======
 >>>>>>> parent of b95f955 (General push)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11651,13 +11629,8 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
-<<<<<<< HEAD
 --- !u!4 &2130744249
 Transform:
-=======
---- !u!224 &2146316090
-RectTransform:
->>>>>>> parent of b95f955 (General push)
 =======
 --- !u!224 &2146316090
 RectTransform:
@@ -11667,12 +11640,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
-<<<<<<< HEAD
   m_GameObject: {fileID: 2130744248}
   serializedVersion: 2
-=======
-  m_GameObject: {fileID: 2146316089}
->>>>>>> parent of b95f955 (General push)
 =======
   m_GameObject: {fileID: 2146316089}
 >>>>>>> parent of b95f955 (General push)
@@ -11680,7 +11649,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-<<<<<<< HEAD
 <<<<<<< HEAD
   m_Children:
   - {fileID: 130840395}
@@ -11718,8 +11686,6 @@ Transform:
   m_Father: {fileID: 453533001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 =======
-=======
->>>>>>> parent of b95f955 (General push)
   m_Children: []
   m_Father: {fileID: 1464825211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11989,7 +11955,4 @@ SceneRoots:
   - {fileID: 328131530}
   - {fileID: 1111472344}
   - {fileID: 1455467594}
-<<<<<<< HEAD
->>>>>>> parent of b95f955 (General push)
-=======
 >>>>>>> parent of b95f955 (General push)
