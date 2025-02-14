@@ -11,8 +11,6 @@ public class PlayerManager : MonoBehaviour
     [Header ("Internal values")]
     private Vector3 moveDirection;
     private int jumpCount;
-    private bool fallStateSwitch;
-    private float coyoteTimeCount;
 
 
     [Header ("Movement modifiers values")]
@@ -23,7 +21,6 @@ public class PlayerManager : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float jumpResistMultiplier = 2f;
     public float gRayDistance = 0.5f;
-    public float coyoteTime = 0.1f;
 
 
     [Header ("Layer modifiers")]
@@ -32,7 +29,7 @@ public class PlayerManager : MonoBehaviour
 
 
     [Header ("Behaviour booleans")]
-    public bool isGrounded;
+    public bool isFalling;
 
     private void Awake()
         {
@@ -99,28 +96,17 @@ public class PlayerManager : MonoBehaviour
             Vector3 gRayOrigin = transform.position;
             
             RaycastHit hit;
-
-            isGrounded = Physics.Raycast(gRayOrigin, -Vector3.up, out hit, gRayDistance, groundMask);
             
-            if (isGrounded)
+            if (Physics.Raycast(gRayOrigin, -Vector3.up, out hit, gRayDistance, groundMask))
                 {
+                    isFalling = false;
                     jumpCount = jumpAmount;
-                    coyoteTimeCount = coyoteTime;
-
-                    if (fallStateSwitch) 
-                        {
-                            fallStateSwitch = false;
-                            inputManager.isJump = Input.GetButton("Jump");
-                        }
-                    
                 }
             else
                 {
-                    fallStateSwitch = true;
-                    coyoteTimeCount -= Time.deltaTime;
+                    isFalling = true;
                 }
         }
-
 
     private void GravityUpdate()
         {
@@ -128,31 +114,22 @@ public class PlayerManager : MonoBehaviour
                 {
                     pRigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier) * Time.deltaTime;  //falling
                 }
-            else if (pRigidbody.velocity.y > 0 && !Input.GetButton ("Jump")) 
+            else if (pRigidbody.velocity.y > 0 && !inputManager.isJump) 
                 {
                     pRigidbody.velocity += Vector3.up * Physics.gravity.y * (jumpResistMultiplier) * Time.deltaTime;  //low jump resistance force
                 }
         }
 
-
     private void PlayerJump()
         {
             if (inputManager.isJump)
                 {
-                   if (coyoteTimeCount > 0f)
+                    if (jumpCount > 0)
                         {
-                            pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, jumpForce, pRigidbody.velocity.z);
-                            //isJumping = true;
-                        }
-
-                    else if (jumpCount > 0)
-                        {
+                            pRigidbody.velocity = Vector3.up * jumpForce;
                             jumpCount -= 1;
-                            pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, jumpForce, pRigidbody.velocity.z);
                             //isJumping = true;
                         }
-                    
-                    inputManager.isJump = false;
                 }
         }
 }
