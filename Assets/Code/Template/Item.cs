@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "ScriptableObject/Item")]
@@ -37,3 +34,5 @@ public class Item : ScriptableObject
         OneOfAKind
     }
 }
+
+//Template for item scriptable object

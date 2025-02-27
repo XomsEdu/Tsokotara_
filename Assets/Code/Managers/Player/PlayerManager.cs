@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     public int jumpAmount = 1;
     public float fallMultiplier = 2.5f;
     public float jumpResistMultiplier = 2f;
+    public float gravityScaler;
     public float gRayDistance = 0.5f;
     public float coyoteTime = 0.1f;
 
@@ -124,6 +125,8 @@ public class PlayerManager : MonoBehaviour
 
     private void GravityUpdate()
         {
+            pRigidbody.velocity += Vector3.up * Physics.gravity.y * (gravityScaler) * Time.deltaTime;
+
             if (pRigidbody.velocity.y < 0) 
                 {
                     pRigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier) * Time.deltaTime;  //falling
