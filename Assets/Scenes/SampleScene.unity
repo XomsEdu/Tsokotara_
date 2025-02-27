@@ -5878,6 +5878,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: stackSize
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8353,6 +8358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropPlace: {fileID: 1616902491}
+  droppedItemPrefab: {fileID: 8510238244346025018, guid: 04f26f6356c649d369ad2cac154bd841,
+    type: 3}
 --- !u!114 &1596177095 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7256537901611585638, guid: be4f977a9ca42d99d9b96f13de5ed179,
@@ -11813,6 +11820,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: stackSize
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
       propertyPath: m_LocalPosition.x
