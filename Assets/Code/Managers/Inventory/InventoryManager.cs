@@ -13,4 +13,4 @@ public class InventoryManager : MonoBehaviour
         }
 }
 
-//Inventory item spawner
+//Inventory item storage and spawner
