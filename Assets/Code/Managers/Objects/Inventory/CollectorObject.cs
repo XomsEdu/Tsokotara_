@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CollectorManager : MonoBehaviour
+public class CollectorObject : MonoBehaviour
 {
     public InventorySlot[] pickUpSlots;
     public GameObject inventoryItemPrefab;
