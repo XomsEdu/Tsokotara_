@@ -3,7 +3,6 @@ using UnityEngine;
 public class CrossSceneRefInit : MonoBehaviour
 {
     public static GameObject chestStackStatic;  public GameObject chestStack;
-
     public static GameObject smallFillerStatic; public GameObject smallFiller;
 
     private void Awake()

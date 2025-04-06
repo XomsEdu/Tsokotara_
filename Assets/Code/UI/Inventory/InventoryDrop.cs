@@ -23,7 +23,7 @@ public class InventoryDrop : MonoBehaviour, IDropHandler
             DroppedItem droppedItemScript = droppedItemGO.GetComponentInChildren<DroppedItem>();
             droppedItemScript.item = item;
             droppedItemScript.stackSize = stackSize;
-        }
+        } //Needs refactoring to pull stuff and not instantiate
 }
 
 //Drop place would need additional raycast check to drop object in correct scene

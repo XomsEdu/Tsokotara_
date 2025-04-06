@@ -44,7 +44,7 @@ public class CollectorObject : MonoBehaviour
             GameObject newItemGO = Instantiate(inventoryItemPrefab, slot.transform);
             InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
             inventoryItem.InitialiseItem(item, count);
-        }
+        } //Maybe need to refactor replacing instantiate with pull
 }
 
 //Calculator for picking up items on collector object
