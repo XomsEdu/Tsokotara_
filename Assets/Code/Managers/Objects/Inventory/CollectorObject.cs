@@ -20,21 +20,21 @@ public class CollectorObject : MonoBehaviour
                     if (itemInSlot != null && itemInSlot.item == droppedItem.item)
                         {
                             int spaceLeft = itemInSlot.item.stackSize - itemInSlot.count;
-                            int toAdd = Mathf.Min(spaceLeft, droppedItem.stackSize);
+                            int toAdd = Mathf.Min(spaceLeft, droppedItem.localStack);
                             itemInSlot.count += toAdd;
                             itemInSlot.RefreshCount();
                             droppedItem.ReduceStackSize(toAdd);
 
-                            if (droppedItem.stackSize <= 0) return;
+                            if (droppedItem.localStack <= 0) return;
                         }
 
                     if (itemInSlot == null)
                         {
-                            int toAdd = Mathf.Min(maxStackSize, droppedItem.stackSize);
+                            int toAdd = Mathf.Min(maxStackSize, droppedItem.localStack);
                             SpawnNewItem(droppedItem.item, slot, toAdd);
                             droppedItem.ReduceStackSize(toAdd);
 
-                            if (droppedItem.stackSize <= 0) return;
+                            if (droppedItem.localStack <= 0) return;
                         }
                 }
         }

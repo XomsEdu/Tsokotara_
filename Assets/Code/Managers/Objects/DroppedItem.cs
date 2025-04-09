@@ -3,7 +3,7 @@ using UnityEngine;
 public class DroppedItem : MonoBehaviour
 {
     public Item item;
-    public int stackSize;
+    public int localStack;
     public int ID;
 
     private void Awake()
@@ -18,15 +18,15 @@ public class DroppedItem : MonoBehaviour
             DroppedItem mergeItem = other.GetComponent<DroppedItem>();
             if (mergeItem != null && mergeItem.item == this.item && mergeItem.ID <= this.ID)
                 {
-                    mergeItem.stackSize += this.stackSize; 
+                    mergeItem.localStack += this.localStack; 
                     Destroy(transform.parent.gameObject);
                 } //Maybe refactor to pulling instead of destroying item
         }
 
     public void ReduceStackSize(int amount)
         {
-            stackSize -= amount;
-            if (stackSize <= 0) Destroy(transform.parent.gameObject);
+            localStack -= amount;
+            if (localStack <= 0) Destroy(transform.parent.gameObject);
         } //Maybe refactor to pulling instead of destroying item
 }
 

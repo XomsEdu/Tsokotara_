@@ -370,12 +370,17 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c,
+      objectReference: {fileID: 11400000, guid: b2e199bf19516d3e985a66ad9ac0a160,
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
       propertyPath: stackSize
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: localStack
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
@@ -1758,12 +1763,17 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 36b3e1013780deaf88e9b735962e56e3,
+      objectReference: {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c,
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
       propertyPath: stackSize
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: localStack
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
@@ -7808,7 +7818,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795,
+        type: 2}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
       propertyPath: stackSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: localStack
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
@@ -10619,12 +10640,17 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 36b3e1013780deaf88e9b735962e56e3,
+      objectReference: {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c,
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
       propertyPath: stackSize
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: localStack
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}

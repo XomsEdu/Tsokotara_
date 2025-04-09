@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca07d8faad25a507e9d6c651d9430f3a, type: 3}
   m_Name: Nuke
   m_EditorClassIdentifier: 
-  type: 1
-  rarity: 5
-  title: Nuclear bomb
-  image: {fileID: 21300000, guid: c508376fa735f2279b06d40004495283, type: 3}
-  stackSize: 12
+  itemName: Nuke
+  itemType: 1
+  itemGameObject: {fileID: 0}
+  <imageIcon>k__BackingField: {fileID: 21300000, guid: c508376fa735f2279b06d40004495283,
+    type: 3}
+  <stackSize>k__BackingField: 16
+  usableSlots: 

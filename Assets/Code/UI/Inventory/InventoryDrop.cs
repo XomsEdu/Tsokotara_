@@ -22,7 +22,7 @@ public class InventoryDrop : MonoBehaviour, IDropHandler
             GameObject droppedItemGO = Instantiate(droppedItemPrefab, position, Quaternion.identity);
             DroppedItem droppedItemScript = droppedItemGO.GetComponentInChildren<DroppedItem>();
             droppedItemScript.item = item;
-            droppedItemScript.stackSize = stackSize;
+            droppedItemScript.localStack = stackSize;
         } //Needs refactoring to pull stuff and not instantiate
 }
 
