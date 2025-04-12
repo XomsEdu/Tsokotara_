@@ -15,15 +15,14 @@ MonoBehaviour:
   itemName: Shotgun
   itemType: 1
   itemGameObject: {fileID: 0}
-  <imageIcon>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000,
-    type: 0}
-  <stackSize>k__BackingField: 2
-  usableSlots: 
+  <imageIcon>k__BackingField: {fileID: 0}
+  <stackSize>k__BackingField: 12
+  equipableSlots: 
   animationSet: {fileID: 0}
   strength: 12
-  tempo: 3
-  speed: 5
+  tempo: 13
+  speed: 2
   singleActionUse: 1
   fedResource:
   - {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c, type: 2}
-  resourceStore: 12
+  resourceStore: 5
