@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestTrigger : MonoBehaviour
 {
     [SerializeField] private GameEvent questGoal;
     [SerializeField] private int amount = 2;
+    public Item item;
 
     private void OnEnable()
     {
-        questGoal.Raise(this, amount);
+        questGoal.Raise(this, item, amount);
     }
 
     

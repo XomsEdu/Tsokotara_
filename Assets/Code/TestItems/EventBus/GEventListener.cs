@@ -2,45 +2,29 @@ using UnityEngine;
 using UnityEngine.Events;
 
 //[System.Serializable]
-public class CustomGameEvent : UnityEvent <Component, object> {}
-public class GEventListener //: MonoBehaviour
+public class CustomGameEvent : UnityEvent <Component, object, int> {}
+
+[System.Serializable]
+public class GEventListener
 {
     public GameEvent gameEvent;
     public CustomGameEvent response;
 
-    /*private void OnEnable()
-        {   gameEvent.RegisterListener(this);   }
+    public void Register()      {   gameEvent.RegisterListener(this);   }
+    public void Unregister()    {   gameEvent.UnregisterListener(this); }
 
-    private void OnDisable()
-        {   gameEvent.UnregisterListener(this); } */
-
-    public virtual void OnEventRaised(Component sender, object data)
+    public virtual void OnEventRaised(Component sender, object data, int amount)
         {   
-            //response.Invoke(sender, data);
+            //response.Invoke(sender, data, amount);
         }
 }
 
+//This parental class is to be added and used in other MonoBehaviour scripts
+
 /* Invoker works with GameEvent like this:
 
-    onGEInvoked.Raise(this, dataToSend);
+    gameEvent.Raise(this, dataToSend);
+    Attach public GameEvent; (scriptable object)
 
-    Attach public GameEvent; (scriptable object) 
-    and on Enable (read subscription) of listener GameEventListener calls GameEvent.RegisterListener.
-    Listener object will work something like:
-    private void UpdateData(Component sender, object data)
-        {
-            if (sender is player) or if (sender is Health) or if (data is int)
-                {
-                    SetData(data);
-                }
-        }
-
-    private void SetData(int health)
-        {
-            healthText.text = health.ToString();
-        }
-
+    OnEnable of listener, GameEventListener calls GameEvent.RegisterListener in Register()
 */
-
-//This script will majoraly be used to code questStep class that will listen to events so basically
-//we need to write it inheritantly from this class

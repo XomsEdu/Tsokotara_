@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CollectorObject : MonoBehaviour
 {
-    public InventorySlot[] pickUpSlots;
-    public GameObject inventoryItemPrefab;
+    [SerializeField] private InventorySlot[] pickUpSlots;
+    [SerializeField] private GameObject inventoryItemPrefab;
 
     public void PickUpItem(DroppedItem droppedItem)
         {
@@ -48,3 +48,6 @@ public class CollectorObject : MonoBehaviour
 }
 
 //Calculator for picking up items on collector object
+
+//Gonna need InventoryManager for SpawnNewItem() 
+//Gonna need ItemCheck trigger to be used from new Quests on their addition

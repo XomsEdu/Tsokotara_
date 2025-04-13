@@ -12,12 +12,12 @@ public class InventoryDrop : MonoBehaviour, IDropHandler
             InventoryItem dragableItem = dropped.GetComponent<InventoryItem>();
             if (dragableItem != null)
                 {
-                    Destroy(dropped);
+                    Destroy(dropped); //Pooling needed
                     CreateDroppedItem(dragableItem.item, dragableItem.count, dropPlace.position);
                 }
         }
 
-    private void CreateDroppedItem(Item item, int stackSize, Vector3 position)
+    private void CreateDroppedItem(Item item, int stackSize, Vector3 position) //Pooling needed
         {
             GameObject droppedItemGO = Instantiate(droppedItemPrefab, position, Quaternion.identity);
             DroppedItem droppedItemScript = droppedItemGO.GetComponentInChildren<DroppedItem>();

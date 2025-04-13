@@ -7,7 +7,7 @@ public class QuestGiver : MonoBehaviour
 
     private void Awake()
         {
-            quest.OnQuestBegin();
+            quest.OnQuestRegister();
             player.AddQuest(quest);
         }
 }

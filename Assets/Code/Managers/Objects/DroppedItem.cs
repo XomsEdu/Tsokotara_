@@ -14,7 +14,6 @@ public class DroppedItem : MonoBehaviour
             CollectorObject collector = other.GetComponent<CollectorObject>();
             if (collector != null) collector.PickUpItem(this);
 
-
             DroppedItem mergeItem = other.GetComponent<DroppedItem>();
             if (mergeItem != null && mergeItem.item == this.item && mergeItem.ID <= this.ID)
                 {

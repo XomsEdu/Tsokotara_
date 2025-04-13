@@ -3,36 +3,22 @@ using UnityEngine;
 [System.Serializable]
 public class QuestGoal : GEventListener
 {
+    [SerializeField] private string description;
+    [SerializeField] private Object requieredData;
+    [SerializeField] private int requieredAmount;
+    [SerializeField] private int questStage; //On which of the quest stage this quest opens
+
+    [SerializeField] private int currentAmount = 0;
     [HideInInspector] public Quest papaQuest;
-    public string description;
-    [SerializeField] private GameObject requieredSenderGO;
-    public int requieredAmount;
 
-    public int currentAmount;
-    public bool isCompleted { get; private set; } = false; //RO
+    public bool isCompleted()   {   return currentAmount >= requieredAmount;  }
 
-    public void Register()
-        {   gameEvent.RegisterListener(this);   }
-
-    public void Unregister()
-        {   gameEvent.UnregisterListener(this); }
-
-    public override void OnEventRaised(Component sender, object data)
+    public override void OnEventRaised(Component sender, object data, int amount)
         {
             //Debug.Log("Event raised number " + data + " from " + sender);
 
-            GameObject senderGameObject = sender.gameObject;    int? intData = data as int?;
-            
-            if (senderGameObject = requieredSenderGO)
-                {
-                    if (intData.HasValue)
-                    currentAmount += intData.Value;
-                }
-
-            if (currentAmount >= requieredAmount) 
-                {
-                    isCompleted = true;
-                    papaQuest.CompleteProgressCheck();
-                }
+            if ((Object) data == requieredData || requieredData == null && amount != 0)
+                currentAmount += amount;
+            if (isCompleted() || amount < 0) papaQuest.CompleteProgressCheck();
         }
 }
