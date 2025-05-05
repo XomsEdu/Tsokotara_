@@ -11,7 +11,6 @@ public class PlayerManager : MonoBehaviour
     [Header ("Internal values")]
     private Vector3 moveDirection;
     private int jumpCount;
-    private bool fallStateSwitch;
     private float coyoteTimeCount;
 
 
@@ -37,9 +36,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
         {
-            inputManager = GetComponent<InputManager>();
             pRigidbody = GetComponent<Rigidbody>();
             cameraObject = Camera.main.transform;
+            inputManager = InputManager.instance;
         }
 
     private void Update()
@@ -107,17 +106,9 @@ public class PlayerManager : MonoBehaviour
                 {
                     jumpCount = jumpAmount;
                     coyoteTimeCount = coyoteTime;
-
-                    if (fallStateSwitch) 
-                        {
-                            fallStateSwitch = false;
-                            inputManager.isJump = Input.GetButton("Jump");
-                        }
-                    
                 }
             else
                 {
-                    fallStateSwitch = true;
                     coyoteTimeCount -= Time.deltaTime;
                 }
         }
@@ -131,7 +122,7 @@ public class PlayerManager : MonoBehaviour
                 {
                     pRigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier) * Time.deltaTime;  //falling
                 }
-            else if (pRigidbody.velocity.y > 0 && !Input.GetButton ("Jump")) 
+            else if (pRigidbody.velocity.y > 0 && !inputManager.isJumpHeld) 
                 {
                     pRigidbody.velocity += Vector3.up * Physics.gravity.y * (jumpResistMultiplier) * Time.deltaTime;  //low jump resistance force
                 }
@@ -140,22 +131,13 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerJump()
         {
-            if (inputManager.isJump)
-                {
-                   if (coyoteTimeCount > 0f)
-                        {
-                            pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, jumpForce, pRigidbody.velocity.z);
-                            //isJumping = true;
-                        }
+            if (coyoteTimeCount > 0f && inputManager.isJumpHeld)
+                pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, jumpForce, pRigidbody.velocity.z);
 
-                    else if (jumpCount > 0)
-                        {
-                            jumpCount -= 1;
-                            pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, jumpForce, pRigidbody.velocity.z);
-                            //isJumping = true;
-                        }
-                    
-                    inputManager.isJump = false;
+            if (coyoteTimeCount <= 0f && jumpCount > 0 && inputManager.isJumpPressed)
+                {
+                    jumpCount -= 1;
+                    pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, jumpForce, pRigidbody.velocity.z);
                 }
         }
 }

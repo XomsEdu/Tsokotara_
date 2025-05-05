@@ -127,17 +127,105 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""25452b8a-d9a1-4c9a-b004-de0973245276"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""db2b09f3-4c8b-4872-9d81-1944a3f959eb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CancelAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d2f6b73-491d-4a9b-9c2d-740705644f90"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""7130d916-c013-4b36-98ae-64186ac435cf"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d4893b00-6499-4236-bcd2-85499cee2bf4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bb7bd38-8fca-4285-badd-16a2a27f0809"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3389621-289b-4d20-8903-5439d84eda03"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI_Selection"",
+            ""id"": ""4e7f2e25-27fb-4ea6-9419-7bcfc6004e5a"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""a800cef0-c88a-4852-bab1-8b2024a75ff8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1b425085-50f5-4e9d-9355-6e32236adc9e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -153,12 +241,19 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Inventory = m_Interaction.FindAction("Inventory", throwIfNotFound: true);
+        m_Interaction_MainAction = m_Interaction.FindAction("MainAction", throwIfNotFound: true);
+        m_Interaction_HeavyAction = m_Interaction.FindAction("HeavyAction", throwIfNotFound: true);
+        m_Interaction_CancelAction = m_Interaction.FindAction("CancelAction", throwIfNotFound: true);
+        // UI_Selection
+        m_UI_Selection = asset.FindActionMap("UI_Selection", throwIfNotFound: true);
+        m_UI_Selection_Newaction = m_UI_Selection.FindAction("New action", throwIfNotFound: true);
     }
 
     ~@InputActions()
     {
         UnityEngine.Debug.Assert(!m_Movement.enabled, "This will cause a leak and performance issues, InputActions.Movement.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Interaction.enabled, "This will cause a leak and performance issues, InputActions.Interaction.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI_Selection.enabled, "This will cause a leak and performance issues, InputActions.UI_Selection.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -275,11 +370,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Interaction;
     private List<IInteractionActions> m_InteractionActionsCallbackInterfaces = new List<IInteractionActions>();
     private readonly InputAction m_Interaction_Inventory;
+    private readonly InputAction m_Interaction_MainAction;
+    private readonly InputAction m_Interaction_HeavyAction;
+    private readonly InputAction m_Interaction_CancelAction;
     public struct InteractionActions
     {
         private @InputActions m_Wrapper;
         public InteractionActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_Interaction_Inventory;
+        public InputAction @MainAction => m_Wrapper.m_Interaction_MainAction;
+        public InputAction @HeavyAction => m_Wrapper.m_Interaction_HeavyAction;
+        public InputAction @CancelAction => m_Wrapper.m_Interaction_CancelAction;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -292,6 +393,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @MainAction.started += instance.OnMainAction;
+            @MainAction.performed += instance.OnMainAction;
+            @MainAction.canceled += instance.OnMainAction;
+            @HeavyAction.started += instance.OnHeavyAction;
+            @HeavyAction.performed += instance.OnHeavyAction;
+            @HeavyAction.canceled += instance.OnHeavyAction;
+            @CancelAction.started += instance.OnCancelAction;
+            @CancelAction.performed += instance.OnCancelAction;
+            @CancelAction.canceled += instance.OnCancelAction;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -299,6 +409,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @MainAction.started -= instance.OnMainAction;
+            @MainAction.performed -= instance.OnMainAction;
+            @MainAction.canceled -= instance.OnMainAction;
+            @HeavyAction.started -= instance.OnHeavyAction;
+            @HeavyAction.performed -= instance.OnHeavyAction;
+            @HeavyAction.canceled -= instance.OnHeavyAction;
+            @CancelAction.started -= instance.OnCancelAction;
+            @CancelAction.performed -= instance.OnCancelAction;
+            @CancelAction.canceled -= instance.OnCancelAction;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -316,6 +435,52 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public InteractionActions @Interaction => new InteractionActions(this);
+
+    // UI_Selection
+    private readonly InputActionMap m_UI_Selection;
+    private List<IUI_SelectionActions> m_UI_SelectionActionsCallbackInterfaces = new List<IUI_SelectionActions>();
+    private readonly InputAction m_UI_Selection_Newaction;
+    public struct UI_SelectionActions
+    {
+        private @InputActions m_Wrapper;
+        public UI_SelectionActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_UI_Selection_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_UI_Selection; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UI_SelectionActions set) { return set.Get(); }
+        public void AddCallbacks(IUI_SelectionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UI_SelectionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UI_SelectionActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(IUI_SelectionActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(IUI_SelectionActions instance)
+        {
+            if (m_Wrapper.m_UI_SelectionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUI_SelectionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UI_SelectionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UI_SelectionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UI_SelectionActions @UI_Selection => new UI_SelectionActions(this);
     public interface IMovementActions
     {
         void OnWASD(InputAction.CallbackContext context);
@@ -324,5 +489,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IInteractionActions
     {
         void OnInventory(InputAction.CallbackContext context);
+        void OnMainAction(InputAction.CallbackContext context);
+        void OnHeavyAction(InputAction.CallbackContext context);
+        void OnCancelAction(InputAction.CallbackContext context);
+    }
+    public interface IUI_SelectionActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

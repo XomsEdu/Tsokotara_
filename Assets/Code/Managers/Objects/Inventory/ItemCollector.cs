@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class CollectorObject : MonoBehaviour
+public class ItemCollector : MonoBehaviour
 {
     [SerializeField] private InventorySlot[] pickUpSlots;
     [SerializeField] private GameObject inventoryItemPrefab;
 
-    public void PickUpItem(DroppedItem droppedItem)
+    public void AddItem(IGiveItem itemObject)
         {
-            if (droppedItem == null) return;
-
-            int maxStackSize = droppedItem.item.stackSize;
+            if (itemObject == null) return;
+            int localStack = itemObject.localCount;
 
             foreach (InventorySlot slot in pickUpSlots)
                 {
@@ -17,26 +16,26 @@ public class CollectorObject : MonoBehaviour
 
                     InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
                     
-                    if (itemInSlot != null && itemInSlot.item == droppedItem.item)
+                    if (itemInSlot != null && itemInSlot.item == itemObject.item && itemInSlot.count < itemObject.item.stackSize)
                         {
                             int spaceLeft = itemInSlot.item.stackSize - itemInSlot.count;
-                            int toAdd = Mathf.Min(spaceLeft, droppedItem.localStack);
-                            itemInSlot.count += toAdd;
-                            itemInSlot.RefreshCount();
-                            droppedItem.ReduceStackSize(toAdd);
+                            int toAdd = Mathf.Min(spaceLeft, localStack);
+                            itemInSlot.count += toAdd;  itemInSlot.RefreshCount();
+                            localStack -= toAdd;
 
-                            if (droppedItem.localStack <= 0) return;
+                            if (localStack <= 0) break;
                         }
-
-                    if (itemInSlot == null)
+                    else if (itemInSlot == null)
                         {
-                            int toAdd = Mathf.Min(maxStackSize, droppedItem.localStack);
-                            SpawnNewItem(droppedItem.item, slot, toAdd);
-                            droppedItem.ReduceStackSize(toAdd);
+                            int toAdd = Mathf.Min(itemObject.item.stackSize, localStack);
+                            SpawnNewItem(itemObject.item, slot, toAdd);
+                            localStack -= toAdd;
 
-                            if (droppedItem.localStack <= 0) return;
+                            if (localStack <= 0) break;
                         }
                 }
+
+            itemObject.StackReturn(localStack);
         }
     
     public void SpawnNewItem(Item item, InventorySlot slot, int count) //UI logic

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class QuestTrigger : MonoBehaviour
 {
-    [SerializeField] private GameEvent questGoal;
+    [SerializeField] private GEvent questGoal;
     [SerializeField] private int amount = 2;
     public Item item;
 

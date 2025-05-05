@@ -374,13 +374,19 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
+      propertyPath: localItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 3011124bf6c7b6c82bbb47772034e123,
+        type: 2}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
       propertyPath: stackSize
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
       propertyPath: localStack
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5542446032844849964, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
@@ -1764,6 +1770,12 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c,
+        type: 2}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: localItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795,
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
@@ -4353,6 +4365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InventorySlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475084259009988119, guid: be4f977a9ca42d99d9b96f13de5ed179,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7948,6 +7965,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
+      propertyPath: localItem
+      value: 
+      objectReference: {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c,
+        type: 2}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
       propertyPath: stackSize
       value: 100
       objectReference: {fileID: 0}
@@ -10765,6 +10788,12 @@ PrefabInstance:
       propertyPath: item
       value: 
       objectReference: {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c,
+        type: 2}
+    - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
+        type: 3}
+      propertyPath: localItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795,
         type: 2}
     - target: {fileID: 3351498857385316508, guid: 04f26f6356c649d369ad2cac154bd841,
         type: 3}
@@ -13916,7 +13945,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925074747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad76ea9323308a80eb91276842f8306a, type: 3}
+  m_Script: {fileID: 11500000, guid: 742785f13d694ed7baab673e21305f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1933347331
@@ -14067,7 +14096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questGoal: {fileID: 11400000, guid: 8fcbbf1a24eaf1abc8a233a7f1e580ab, type: 2}
-  amount: 2
+  amount: 5
   item: {fileID: 11400000, guid: 3011124bf6c7b6c82bbb47772034e123, type: 2}
 --- !u!4 &1940455941
 Transform:
@@ -15126,29 +15155,20 @@ MonoBehaviour:
       description: Kill Machine
       requieredData: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795, type: 2}
       requieredAmount: 10
+      questStage: 0
       currentAmount: 0
-      papaQuest:
-        questStatus: 0
-        questDescription: 
-        questGoals: []
     - gameEvent: {fileID: 11400000, guid: 8fcbbf1a24eaf1abc8a233a7f1e580ab, type: 2}
       description: Kill Machine
       requieredData: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795, type: 2}
       requieredAmount: 15
+      questStage: 0
       currentAmount: 0
-      papaQuest:
-        questStatus: 0
-        questDescription: 
-        questGoals: []
     - gameEvent: {fileID: 11400000, guid: 8fcbbf1a24eaf1abc8a233a7f1e580ab, type: 2}
       description: Kill Machine
       requieredData: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795, type: 2}
       requieredAmount: 18
+      questStage: 0
       currentAmount: 0
-      papaQuest:
-        questStatus: 0
-        questDescription: 
-        questGoals: []
 --- !u!4 &2069720907
 Transform:
   m_ObjectHideFlags: 0

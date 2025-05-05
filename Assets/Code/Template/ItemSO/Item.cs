@@ -15,18 +15,6 @@ public class Item : ScriptableObject
     [field: SerializeField] public int stackSize { get; private set; } = 1;
     [SerializeField] private SlotType[] equipableSlots;
 
-
-    public enum ItemType 
-    {
-        MeleeWeapon,
-        RangeWeapon,
-        Tool,
-        Consumable,
-        Plecable,
-        Wearable,
-        Resource
-    }
-
     /* private enum Rarity
         {
             Common,
@@ -38,16 +26,27 @@ public class Item : ScriptableObject
         } */
 }
 
+public enum ItemType 
+    {
+        MeleeWeapon,
+        RangeWeapon,
+        Tool,
+        Consumable,
+        Plecable,
+        Wearable,
+        Resource
+    }
+
 public enum SlotType
-{
-    Head,
-    Chest,
-    Hand,
-    Legs,
-    Feet,
-    Ring,
-    Back,
-    Belt
-    //etc
-}
+    {
+        Head,
+        Chest,
+        Hand,
+        Legs,
+        Feet,
+        Ring,
+        Back,
+        Belt
+        //etc
+    }
 //Template for item data
