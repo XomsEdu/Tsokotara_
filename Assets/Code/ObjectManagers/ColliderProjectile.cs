@@ -15,18 +15,22 @@ public class ColliderProjectile : MonoBehaviour
     [NonSerialized] public ItemUsable itemStats;
     [NonSerialized] public ProjectileShooter interactionItem;
     [NonSerialized] public GameObject prefabThis;
+    private GameObject shooterOfProjectile;
     private Rigidbody thisRigidbody;
 
     private void Awake() => isPhysicsBased = (thisRigidbody = GetComponent<Rigidbody>()) != null;
 
-    public void ShootProjectile()
+    public void ShootProjectile(GameObject shooter)
         {
+            shooterOfProjectile = shooter;
             gameObject.SetActive(true);
             StartCoroutine(ObjectLive());
         }
 
     private void OnTriggerEnter(Collider other)
         {
+            if(shooterOfProjectile == other.gameObject) return;
+
             StatsManager enemyStats = other.GetComponent<StatsManager>();
             if (enemyStats != null)
                 {

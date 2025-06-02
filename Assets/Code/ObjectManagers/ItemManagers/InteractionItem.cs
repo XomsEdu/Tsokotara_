@@ -6,7 +6,7 @@ using UnityEngine;
 public class InteractionItem : MonoBehaviour //needs kids for raycast, projectile spawn and event controlled stuff
 {
     public ItemUsable item;
-    public ActionManager actionManager;
+    [NonSerialized] public GameObject owner;
     [NonSerialized] public Transform spawnerPosition;
 
     public virtual void SetAction(ComboMove move)

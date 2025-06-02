@@ -12,9 +12,10 @@ public class NavManager : MonoBehaviour
 {
     [Header ("Serialized")]
     public List<NavAction> dailySchedule = new();
-    public CharachterManager navAvatar;
+    public ComboMove attackMove;
 
     [Header ("NonSerialized")]
+    [NonSerialized] public CharachterManager navAvatar;
     [NonSerialized] public Animator navAnimator;
     [NonSerialized] public NavMeshAgent agent;
     [NonSerialized] public NavAction lastNavAction; 
@@ -49,9 +50,8 @@ public class NavManager : MonoBehaviour
     public void WalkTo()
         {
             agent.isStopped = false;
-            Debug.Log($"Current target: {currentTarget}, Agent position: {transform.position}, Distance: {Vector3.Distance(currentTarget, transform.position)}");
+            //Debug.Log($"Current target: {currentTarget}, Agent position: {transform.position}, Distance: {Vector3.Distance(currentTarget, transform.position)}");
             bool result = agent.SetDestination(currentTarget);
-            Debug.Log($"SetDestination success: {result}, Remaining distance: {agent.remainingDistance}, Has path: {agent.hasPath}, Path status: {agent.pathStatus}");  
         }
 
     /*private void LateUpdate()
@@ -64,7 +64,7 @@ public class NavManager : MonoBehaviour
     
     private IEnumerator TakeLook(Transform target)
         {
-            Debug.Log("LookingForSomeone");
+            //Debug.Log("LookingForSomeone");
 
             Vector3 dir = (target.position - transform.position).normalized;
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 100f, ~LayerMask.GetMask("Ignore Raycast")))
@@ -110,9 +110,9 @@ public class NavManager : MonoBehaviour
                     lastNavAction.SelectTarget();
                     WalkTo();
                     yield return new WaitUntil(() => AtPoint());
+                    //lastNavAction.PerformJob();
                 }
-            agent.isStopped = true;
-            //lastNavAction.PerformJob();
+            //if(lastNavAction.targets.Count == 1) lastNavAction.PerformJob();
         }
 
     private void ScheduleAction(float time) 
@@ -146,41 +146,28 @@ public class NavManager : MonoBehaviour
     public void AnimationEventTrigger() => interactionController.ExecuteAction();
     public IEnumerator Attack(Transform attackTarget)
         {
+            interactionController.SetAction(attackMove);
             lastNavAction = null;
             inCombat = true;
             if (attackTarget == null || !attackTarget.gameObject.activeInHierarchy) yield break;
 
-            // Sample NavMesh position near the attack target
             Vector3 samplePos = attackTarget.position + Vector3.up * 2f;
 
             if (NavMesh.SamplePosition(samplePos, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
-                {
-                    currentTarget = navHit.position;
-                    Debug.Log($"[Attack] Sampled NavMesh target at {navHit.position}");
-                }
-            else
-                {
-                    currentTarget = attackTarget.position;
-                    Debug.LogWarning($"[Attack] Failed to sample NavMesh position near {samplePos}");
-                }
+                currentTarget = navHit.position;
+            
+            else currentTarget = attackTarget.position;
 
-            if (!AtPoint())
-                {
-                    Debug.Log("WalkingTo target");
-                    WalkTo();
-                }
+            if (!AtPoint()) WalkTo();
 
             // Face the player
             Vector3 lookPos = attackTarget.position - transform.position;
             lookPos.y = 0;
             transform.rotation = Quaternion.LookRotation(lookPos);
 
-            // Attack logic
-            Debug.Log("Attacking");
-            // navAnimator.SetTrigger("toAttack");
-            yield return new WaitForSeconds(2f); // can be replaced by animation wait
+            navAnimator.SetTrigger("toAttack");
+            yield return new WaitUntil(() => navAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
-            inCombat = false;
             StartCoroutine(TakeLook(attackTarget));
         }
 
@@ -191,10 +178,10 @@ public class NavManager : MonoBehaviour
 public class NavAction
 {
     public float time;
-    public Transform target;
     public List<Transform> targets;
+
     private int targetIndex;
-    public NavManager navManager;
+    [NonSerialized] public NavManager navManager;
 
     public void PerformJob() => navManager.navAnimator.SetTrigger("doJob");
 
@@ -206,36 +193,15 @@ public class NavAction
 
                     Vector3 samplePos = targets[targetIndex].position + Vector3.up * 2f;
 
-                    if (NavMesh.SamplePosition(samplePos, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
-                        {
-                            navManager.currentTarget = navHit.position;
-                            Debug.Log($"[NavAction] Valid NavMesh target at {navHit.position} (from targets list)");
-                        }
-                    else
-                        {
-                            Debug.LogWarning($"[NavAction] SamplePosition failed for: {samplePos}");
-                            navManager.currentTarget = navManager.transform.position; // fallback
-                        }
-                }
-            else if (target != null)
-                {
-                    Vector3 samplePos = target.position + Vector3.up * 2f;
+                    if (NavMesh.SamplePosition(samplePos, out NavMeshHit navHit, 5f, NavMesh.AllAreas))
+                        navManager.currentTarget = navHit.position;
 
-                    if (NavMesh.SamplePosition(samplePos, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
-                        {
-                            navManager.currentTarget = navHit.position;
-                            Debug.Log($"[NavAction] Valid NavMesh target at {navHit.position} (single target)");
-                        }
-                    else
-                        {
-                            Debug.LogWarning($"[NavAction] SamplePosition failed for: {samplePos}");
-                            navManager.currentTarget = navManager.transform.position; // fallback
-                        }
+                    else navManager.currentTarget = navManager.transform.position; // fallback
                 }
             else
                 {
                     Debug.LogWarning("[NavAction] No valid target or targets list to select from.");
                     navManager.currentTarget = navManager.transform.position; // fallback
                 }
-            }
+        }
 }

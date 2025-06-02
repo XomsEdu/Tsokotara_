@@ -15,6 +15,7 @@ public class CharachterManager : MonoBehaviour
         {
             interactionController = rightHand.GetComponentInChildren<InteractionItem>();
             interactionController.spawnerPosition = spawner;
+            interactionController.owner = this.gameObject;
         }
 
 

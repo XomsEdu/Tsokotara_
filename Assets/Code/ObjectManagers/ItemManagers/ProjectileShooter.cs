@@ -9,7 +9,6 @@ public class ProjectileShooter : InteractionItem
 
     public override void SetAction(ComboMove move)
         {
-            Debug.Log("MoveScheduled");
             if (item.comboMoves == null || item.comboMoves.Count == 0) return;
 
             bool hasPool = projectilePool != null && projectilePool.Count > 0;
@@ -46,27 +45,10 @@ public class ProjectileShooter : InteractionItem
                 else Destroy(cloneProjectile);
                 //last if checks are probably temporal
             }
-            //for each collider or for raycast to be instantiated
-            //set list of status effects from combo move that was passed
-            //set item info in order for StatsManager to correctly calculate DMG or whtever
         }
 
     public override void ExecuteAction()
         {
-            if (projectileToUse != null) projectileToUse.ShootProjectile();
-            else Debug.LogWarning($"[{name}] No matching projectile found in pool for: {projectileToUse.name}");
+            if (projectileToUse != null) projectileToUse.ShootProjectile(owner);
         }
 }
-
-
-
-/*
-Attacks and interractions:
-- Spawn a [physical] GO with collider (Bullet, fireball, other magical attack);
-- Shoot a raycast hitscan (immidiate bullet, Lazer);
-- Activate Colliders (on Swords or other melee)
-- Invoke an event (for stuff like c4)
-
-Let`s store and instantiate projectiles/hit colliders in pool in hierchy,
-changing bullets visually before spawning
-*/
