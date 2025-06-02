@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class InventoryDrop : MonoBehaviour, IDropHandler
 {
-    public Transform dropPlace;
+    public Transform dropPlace; //to setup from player obj
     public GameObject droppedItemPrefab;
 
     public void OnDrop(PointerEventData eventData)

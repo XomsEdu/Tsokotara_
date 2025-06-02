@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867b7b21dba6c8e9685ec04c8d2361d7, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  <itemName>k__BackingField: Shotgun
+  <itemType>k__BackingField: 1
+  <itemGameObject>k__BackingField: {fileID: 0}
+  <gripOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  <imageIcon>k__BackingField: {fileID: 0}
+  <stackSize>k__BackingField: 12
+  <equipableSlots>k__BackingField: 
+  <strength>k__BackingField: 2
+  <speed>k__BackingField: 1
+  <comboMoves>k__BackingField:
+  - {fileID: 11400000, guid: 6da8544c25f0b0409aa845b8c3d97f7c, type: 2}
+  <barrelOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  fedResource:
+  - {fileID: 11400000, guid: be2cd80e97afc73b8a66df905d59f46c, type: 2}
+  resourceCapacity: 0
