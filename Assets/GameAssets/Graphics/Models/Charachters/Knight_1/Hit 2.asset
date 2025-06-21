@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870c764fe186b955096b3e1549d805aa, type: 3}
+  m_Name: Hit 2
+  m_EditorClassIdentifier: 
+  <moveType>k__BackingField: 0
+  <getsInterrupted>k__BackingField: 1
+  <requiredMove>k__BackingField: {fileID: 11400000, guid: b2725d55611b35656ac9f74d3376075b,
+    type: 2}
+  <requieredInputActions>k__BackingField: 02000000
+  <animationClip>k__BackingField: {fileID: 7400000, guid: f9450614b4de0d93bbcb38f8737a55d9,
+    type: 2}
+  <statusEffects>k__BackingField:
+  - statusEffectType: 0
+    force: 1
+    ticks: 0
+  <resetComboTimer>k__BackingField: 1
+  <projectile>k__BackingField: {fileID: 8217952786662001115, guid: 1d52028f51d7c8291ac1b25c010ad7eb,
+    type: 3}

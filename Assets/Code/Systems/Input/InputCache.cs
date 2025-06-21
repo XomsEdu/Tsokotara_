@@ -7,7 +7,7 @@ public class InputCache : MonoBehaviour
     public static InputCache instance {get; private set;}
     InputManager inputManager;
 
-    [SerializeField] private float chacheResetTimer = 0.15f;
+    [SerializeField] private float chacheResetTimer = 0.1f;
     public event Action<List<ActionsInput>> OnCacheReset;
 
     private List<ActionsInput> inputActions = new();

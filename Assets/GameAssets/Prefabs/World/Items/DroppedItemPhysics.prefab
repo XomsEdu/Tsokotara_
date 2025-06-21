@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4512127343164872770}
-  - component: {fileID: 7435107038977586805}
+  - component: {fileID: 7746441320614191601}
   - component: {fileID: 5318228029107018756}
   - component: {fileID: 918493226377517829}
   - component: {fileID: 3351498857385316508}
   m_Layer: 0
-  m_Name: NukePickUp
+  m_Name: PickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5542446032844849964}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7435107038977586805
+--- !u!33 &7746441320614191601
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c5e43d1d67cdfd1c3aec32fcbfbd8fb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2187d68d7004b4b1085543992feca6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 439f69b007875b491a07817c3fe64795, type: 2}
-  stackSize: 2
+  localItem: {fileID: 0}
+  localStack: 0
   ID: 0
 --- !u!1 &8510238244346025018
 GameObject:

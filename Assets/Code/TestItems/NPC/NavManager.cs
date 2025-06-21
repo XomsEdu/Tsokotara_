@@ -15,7 +15,7 @@ public class NavManager : MonoBehaviour
     public ComboMove attackMove;
 
     [Header ("NonSerialized")]
-    [NonSerialized] public CharachterManager navAvatar;
+    [NonSerialized] public CharacterManager navAvatar;
     [NonSerialized] public Animator navAnimator;
     [NonSerialized] public NavMeshAgent agent;
     [NonSerialized] public NavAction lastNavAction; 
@@ -27,7 +27,7 @@ public class NavManager : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        navAvatar = GetComponent<CharachterManager>();
+        navAvatar = GetComponent<CharacterManager>();
         eyeSight = navAvatar.head.GetComponent<EyeSight>();
         navAnimator = GetComponent<Animator>();
         interactionController = GetComponentInChildren<InteractionItem>();

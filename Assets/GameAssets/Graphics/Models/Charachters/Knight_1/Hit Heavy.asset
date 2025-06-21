@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870c764fe186b955096b3e1549d805aa, type: 3}
+  m_Name: Hit Heavy
+  m_EditorClassIdentifier: 
+  <moveType>k__BackingField: 0
+  <getsInterrupted>k__BackingField: 1
+  <requiredMove>k__BackingField: {fileID: 11400000, guid: 4161504bf309c8eeeb06f0819b3bd52f,
+    type: 2}
+  <requieredInputActions>k__BackingField: 04000000
+  <animationClip>k__BackingField: {fileID: 7400000, guid: d1af01d2f1fda0be4b5a0d698d643dba,
+    type: 2}
+  <statusEffects>k__BackingField:
+  - statusEffectType: 2
+    force: 1
+    ticks: 5
+  <resetComboTimer>k__BackingField: 0
+  <projectile>k__BackingField: {fileID: 8217952786662001115, guid: 1d52028f51d7c8291ac1b25c010ad7eb,
+    type: 3}

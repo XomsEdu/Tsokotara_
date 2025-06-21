@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
     Rigidbody pRigidbody;
     StatsManager statsManager;
     Transform cameraObject;
+    Animator animator;
 
     [Header ("Internal values")]
     private Vector3 moveDirection;
@@ -18,25 +19,24 @@ public class PlayerManager : MonoBehaviour
     public float fallMultiplier = 2.5f;
     public float jumpResistMultiplier = 2f;
     public float gravityScaler;
-    public float gRayDistance = 0.5f; //avatarInfo
+    public float gRayDistance = 0.5f; //to avatarInfo
     public float coyoteTime = 0.1f;
 
 
     [Header ("Layer modifiers")]
     public LayerMask groundMask;
-    //public LayerMask aimMask;
 
 
     [Header ("Behaviour booleans")]
     public bool isGrounded;
 
-    public CharachterManager avatarInfo;
+    public CharacterManager avatarInfo;
 
     private void Awake()
         {
+            animator = GetComponentInChildren<Animator>();
             pRigidbody = GetComponent<Rigidbody>();
             statsManager = GetComponent<StatsManager>();
-            
         }
 
     private void Start()
@@ -49,10 +49,10 @@ public class PlayerManager : MonoBehaviour
         {
             PlayerMovement();
             PlayerRotation();
-            GroundCheck();
             GravityUpdate();
             PlayerJump();
         }
+    void Update() => GroundCheck();
 
     private void PlayerMovement()
         {
@@ -63,6 +63,11 @@ public class PlayerManager : MonoBehaviour
 
             pRigidbody.velocity = new Vector3(moveDirection.x * statsManager.moveSpeed, 
                 pRigidbody.velocity.y, moveDirection.z * statsManager.moveSpeed);
+
+            if(pRigidbody.velocity.x !=0 || pRigidbody.velocity.z != 0)
+                animator.SetBool("walking", true);
+            else animator.SetBool("walking", false);
+            
         }
 
     private void PlayerRotation()
@@ -86,7 +91,8 @@ public class PlayerManager : MonoBehaviour
     
     private void GroundCheck()
         {
-            Vector3 gRayOrigin = transform.position;
+            Vector3 gRayOrigin = transform.position + Vector3.up * 0.1f;
+            
             
             RaycastHit hit;
 
@@ -94,10 +100,15 @@ public class PlayerManager : MonoBehaviour
             
             if (isGrounded)
                 {
+                    animator.SetBool("isGrounded", true);
                     jumpCount = statsManager.jumpAmount;
                     coyoteTimeCount = coyoteTime;
                 }
-            else coyoteTimeCount -= Time.deltaTime;
+            else 
+                {
+                    animator.SetBool("isGrounded", false);
+                    coyoteTimeCount -= Time.deltaTime;
+                }
         }
 
 
@@ -105,23 +116,29 @@ public class PlayerManager : MonoBehaviour
         {
             pRigidbody.velocity += Vector3.up * Physics.gravity.y * (gravityScaler) * Time.deltaTime;
 
-            if (pRigidbody.velocity.y < 0) 
+            if (pRigidbody.velocity.y < 0)
                 pRigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier) * Time.deltaTime;  //falling
             
             else if (pRigidbody.velocity.y > 0 && !inputManager.isJumpHeld)
                 pRigidbody.velocity += Vector3.up * Physics.gravity.y * (jumpResistMultiplier) * Time.deltaTime;  //low jump resistance force
+        
+            animator.SetFloat("verticalVelocity", pRigidbody.velocity.y);
         }
 
 
     private void PlayerJump()
         {
             if (coyoteTimeCount > 0f && inputManager.isJumpHeld)
-                pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, statsManager.jumpForce, pRigidbody.velocity.z);
+                {
+                    animator.SetTrigger("jump");
+                    pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, statsManager.jumpForce, pRigidbody.velocity.z);
+                }
 
             if (coyoteTimeCount <= 0f && jumpCount > 0 && inputManager.isJumpPressed)
                 {
                     jumpCount -= 1;
                     pRigidbody.velocity = new Vector3(pRigidbody.velocity.x, statsManager.jumpForce, pRigidbody.velocity.z);
+                    animator.SetTrigger("jump");
                 }
         }
 }

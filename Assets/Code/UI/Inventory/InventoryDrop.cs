@@ -13,7 +13,8 @@ public class InventoryDrop : MonoBehaviour, IDropHandler
             if (dragableItem != null)
                 {
                     Destroy(dropped); //Pooling needed
-                    CreateDroppedItem(dragableItem.item, dragableItem.count, dropPlace.position);
+                    Vector3 dropPoint = new Vector3(dropPlace.position.x ,dropPlace.position.y + 5f, dropPlace.position.z);
+                    CreateDroppedItem(dragableItem.item, dragableItem.count, dropPoint);
                 }
         }
 
@@ -23,6 +24,15 @@ public class InventoryDrop : MonoBehaviour, IDropHandler
             DroppedItem droppedItemScript = droppedItemGO.GetComponentInChildren<DroppedItem>();
             droppedItemScript.localItem = item;
             droppedItemScript.localStack = stackSize;
+
+            Rigidbody rigidbody = droppedItemGO.GetComponent<Rigidbody>();
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                {
+                    Vector3 direction = (hit.point - position).normalized;
+
+                    rigidbody.velocity = direction * 10;
+                }
         } //Needs refactoring to pull stuff and not instantiate
 }
 

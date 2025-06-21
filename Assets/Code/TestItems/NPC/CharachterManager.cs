@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharachterManager : MonoBehaviour
+public class CharacterManager : MonoBehaviour
 {
     public Transform rightHand, leftHand, rightFoot, leftFoot, head, spawner;
 
