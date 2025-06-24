@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -92,23 +93,29 @@ public class PlayerManager : MonoBehaviour
     private void GroundCheck()
         {
             Vector3 gRayOrigin = transform.position + Vector3.up * 0.1f;
-            
-            
             RaycastHit hit;
 
             isGrounded = Physics.Raycast(gRayOrigin, -Vector3.up, out hit, gRayDistance, groundMask);
-            
+
             if (isGrounded)
-                {
-                    animator.SetBool("isGrounded", true);
-                    jumpCount = statsManager.jumpAmount;
-                    coyoteTimeCount = coyoteTime;
-                }
-            else 
-                {
-                    animator.SetBool("isGrounded", false);
-                    coyoteTimeCount -= Time.deltaTime;
-                }
+            {
+                animator.SetBool("isGrounded", true);
+                jumpCount = statsManager.jumpAmount;
+                coyoteTimeCount = coyoteTime;
+
+                NavMeshAgent agent = hit.collider.GetComponent<NavMeshAgent>();
+                if (agent != null)
+                    this.transform.SetParent(hit.collider.transform);
+                else
+                    this.transform.SetParent(null);
+            }
+            else
+            {
+                animator.SetBool("isGrounded", false);
+                coyoteTimeCount -= Time.deltaTime;
+
+                this.transform.SetParent(null);
+            }
         }
 
 

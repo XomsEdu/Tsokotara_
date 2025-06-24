@@ -17,7 +17,7 @@ public class StatsManager : MonoBehaviour
     public int level {get; private set;} */
 
 
-    private void Start() => HPCurrent = HPMax;
+    private void OnEnable() => HPCurrent = HPMax;
 
     public float moveSpeed;
     private void moveSpeedUpdate(float amount) => moveSpeed = moveSpeedMultiplier * amount;

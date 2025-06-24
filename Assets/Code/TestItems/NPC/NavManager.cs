@@ -46,19 +46,13 @@ public class NavManager : MonoBehaviour
         if (eyeSight != null) eyeSight.iSenseTarget -= LookInDir;
     }
 
-    private bool AtPoint() => Vector3.Distance(currentTarget, this.transform.position) <= 0.5;
+    private bool AtPoint() => Vector3.Distance(currentTarget, this.transform.position) <= 1;
     public void WalkTo()
         {
             agent.isStopped = false;
-            //Debug.Log($"Current target: {currentTarget}, Agent position: {transform.position}, Distance: {Vector3.Distance(currentTarget, transform.position)}");
             bool result = agent.SetDestination(currentTarget);
+            navAnimator.SetBool("Walking", true);
         }
-
-    /*private void LateUpdate()
-        {
-            if(navAnimator != null) navAnimator.SetFloat
-                ("moveSpeed",agent.velocity.magnitude / agent.speed, 0.1f, Time.deltaTime);
-        }*/
 
     private void LookInDir(Transform target) => StartCoroutine(TakeLook(target));
     
@@ -71,7 +65,7 @@ public class NavManager : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Player"))
                         {
-                            Debug.Log("SeeSomeone");
+                            //Debug.Log("SeeSomeone");
                             StopAllCoroutines();
                             StartCoroutine(Attack(target));
                             yield break;
@@ -104,13 +98,14 @@ public class NavManager : MonoBehaviour
             WalkTo();
             yield return new WaitUntil(() => agent.hasPath && !agent.pathPending);
             yield return new WaitUntil(() => AtPoint());
+            navAnimator.SetBool("Walking", false);
             while(lastNavAction.targets.Count > 1)
                 {
-                    yield return new WaitForSeconds(5); //to replace with wait for look out anim
+                    yield return new WaitForSeconds(5);
                     lastNavAction.SelectTarget();
                     WalkTo();
                     yield return new WaitUntil(() => AtPoint());
-                    //lastNavAction.PerformJob();
+                    lastNavAction.PerformJob();
                 }
             //if(lastNavAction.targets.Count == 1) lastNavAction.PerformJob();
         }
@@ -146,30 +141,53 @@ public class NavManager : MonoBehaviour
     public void AnimationEventTrigger() => interactionController.ExecuteAction();
     public IEnumerator Attack(Transform attackTarget)
         {
-            interactionController.SetAction(attackMove);
-            lastNavAction = null;
-            inCombat = true;
             if (attackTarget == null || !attackTarget.gameObject.activeInHierarchy) yield break;
 
-            Vector3 samplePos = attackTarget.position + Vector3.up * 2f;
+            inCombat = true;
+            lastNavAction = null;
 
-            if (NavMesh.SamplePosition(samplePos, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
-                currentTarget = navHit.position;
-            
-            else currentTarget = attackTarget.position;
+            // Stop movement
+            agent.isStopped = true;
+            navAnimator.SetBool("Walking", false);
 
-            if (!AtPoint()) WalkTo();
+            // Optional: reposition if too far
+            Vector3 targetOffset = attackTarget.position + Vector3.up * 2f;
+            if (!AtPoint())
+                {
+                    if (NavMesh.SamplePosition(targetOffset, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
+                        currentTarget = navHit.position;
+                    else
+                        currentTarget = attackTarget.position;
 
-            // Face the player
+                    WalkTo();
+                    yield return new WaitUntil(AtPoint);
+                    agent.isStopped = true;
+                    navAnimator.SetBool("Walking", false);
+                }
+
+            // Rotate towards player
             Vector3 lookPos = attackTarget.position - transform.position;
             lookPos.y = 0;
             transform.rotation = Quaternion.LookRotation(lookPos);
 
+            // Trigger attack
+            interactionController.SetAction(attackMove);
             navAnimator.SetTrigger("toAttack");
-            yield return new WaitUntil(() => navAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
+            // Wait until animation plays and finishes
+            yield return new WaitUntil(() =>
+                navAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack"));
+
+            yield return new WaitUntil(() =>
+                navAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+            // Attack done
+            inCombat = false;
+
+            // Resume scanning
             StartCoroutine(TakeLook(attackTarget));
         }
+
 
 
 }
@@ -200,7 +218,7 @@ public class NavAction
                 }
             else
                 {
-                    Debug.LogWarning("[NavAction] No valid target or targets list to select from.");
+                    //Debug.LogWarning("[NavAction] No valid target or targets list to select from.");
                     navManager.currentTarget = navManager.transform.position; // fallback
                 }
         }

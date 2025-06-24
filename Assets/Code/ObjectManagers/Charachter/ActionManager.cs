@@ -22,13 +22,14 @@ public class ActionManager : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
         }
 
-    private void Start()
+    private void OnEnable() => StartCoroutine(Initialize());
+    private IEnumerator Initialize()
         {
-            if (InputCache.instance != null)
-                InputCache.instance.OnCacheReset += OnCacheButtonReset;
-
             runtimeOverride = new AnimatorOverrideController(overrideController);
             animator.runtimeAnimatorController = runtimeOverride;
+                    
+            yield return new WaitUntil(() => InputCache.instance != null);
+            InputCache.instance.OnCacheReset += OnCacheButtonReset;
         }
 
     private void OnDisable()

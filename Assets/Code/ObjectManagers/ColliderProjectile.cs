@@ -11,8 +11,8 @@ public class ColliderProjectile : MonoBehaviour
     public bool canParry;
     public Transform transformThis;
 
-    [NonSerialized] public List<StatusEffect> statusEffects;
-    [NonSerialized] public ItemUsable itemStats;
+    public List<StatusEffect> statusEffects;
+    public ItemUsable itemStats;
     [NonSerialized] public ProjectileShooter interactionItem;
     [NonSerialized] public GameObject prefabThis;
     private GameObject shooterOfProjectile;

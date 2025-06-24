@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3382302180467397817}
   - component: {fileID: 7691604075359815938}
   - component: {fileID: -7050280967484932888}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8217952786662001115}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -105,7 +105,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7691604075359815938
 MonoBehaviour:
@@ -119,11 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414d86246bc3054c89fff3f666c6fdcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liveTime: 5
+  liveTime: 0.3
   isPhysicsBased: 1
-  isDestroyedOnContact: 1
+  isDestroyedOnContact: 0
   canParry: 0
   transformThis: {fileID: 0}
+  statusEffects: []
+  itemStats: {fileID: 0}
 --- !u!54 &-7050280967484932888
 Rigidbody:
   m_ObjectHideFlags: 0
